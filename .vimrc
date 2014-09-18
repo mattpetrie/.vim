@@ -1,24 +1,25 @@
+set shell=/bin/bash
 set nocompatible
 
-" Required Vundle setup
+" required vundle setup
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin  'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 
-" CtrlP
-Bundle 'kien/ctrlp.vim'
+" ctrlp
+Plugin 'kien/ctrlp.vim'
 
-" NERDTree
+" nerdtree
 Plugin 'scrooloose/nerdtree'
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd stdinreadpre * let s:std_in=1
+autocmd vimenter * if argc() == 0 && !exists("s:std_in") | nerdtree | endif
 
-map <C-n> :NERDTreeToggle<CR>
+map <c-n> :nerdtreetoggle<cr>
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:nerdtreetype") && b:nerdtreetype == "primary") | q | endif
 
 " bufexplorer
 Plugin 'jlanzarotta/bufexplorer'
@@ -26,11 +27,22 @@ Plugin 'jlanzarotta/bufexplorer'
 " vim-sensible
 Plugin 'tpope/vim-sensible'
 
-" Ack
+" ack
 Plugin 'mileszs/ack.vim'
 
+" ag
+Plugin 'rking/ag.vim'
+
+map <leader>a :ag!<space>
+map <leader>a :ag! <c-r><c-w><cr>
+
+" use ag for search, it's much faster than ack.
+" see https://github.com/ggreer/the_silver_searcher
+" on mac: brew install the_silver_searcher
+let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Improved javascript indentation
+" improved javascript indentation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'pangloss/vim-javascript'
 
@@ -88,5 +100,8 @@ Plugin 'tpope/vim-bundler'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'tpope/vim-rails'
 
+call vundle#end()
+
 filetype plugin indent on
 syntax on
+set relativenumber
