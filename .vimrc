@@ -8,18 +8,54 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fugitive
+"
+" Git in vim, use ,gs for git status then - to stage then C to commit
+" check :help Gstatus for more keys
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'tpope/vim-fugitive'
+
+map <leader>gs :Gstatus<cr>
+map <leader>gc :Gcommit<cr>
+map <leader>ga :Git add --all<cr>:Gcommit<cr>
+map <leader>gb :Gblame<cr>
+
+" Use j/k in status
+function! BufReadIndex()
+  setlocal cursorline
+
+  nnoremap <buffer> <silent> j :call search('^#\t.*','W')<Bar>.<CR>
+  nnoremap <buffer> <silent> k :call search('^#\t.*','Wbe')<Bar>.<CR>
+endfunction
+autocmd BufReadCmd  *.git/index exe BufReadIndex()
+autocmd BufEnter    *.git/index silent normal gg0j
+
+" Start in insert mode for commit
+function! BufEnterCommit()
+  normal gg0
+  if getline('.') == ''
+    start
+  end
+endfunction
+autocmd BufEnter    *.git/COMMIT_EDITMSG  exe BufEnterCommit()
+
+" Automatically remove fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 " ctrlp
 Plugin 'kien/ctrlp.vim'
 
 " nerdtree
 Plugin 'scrooloose/nerdtree'
 
+autocmd vimenter * NERDTree
 autocmd stdinreadpre * let s:std_in=1
-autocmd vimenter * if argc() == 0 && !exists("s:std_in") | nerdtree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-map <c-n> :nerdtreetoggle<cr>
+map <c-n> :NERDTreeToggle<cr>
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:nerdtreetype") && b:nerdtreetype == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " bufexplorer
 Plugin 'jlanzarotta/bufexplorer'
@@ -100,8 +136,26 @@ Plugin 'tpope/vim-bundler'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'tpope/vim-rails'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use hybrid color scheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'w0ng/vim-hybrid'
+
 call vundle#end()
 
 filetype plugin indent on
 syntax on
 set relativenumber
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Vim keys to navigate between panes
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use hybrid color scheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme hybrid
