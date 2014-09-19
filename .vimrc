@@ -1,6 +1,11 @@
 set shell=/bin/bash
 set nocompatible
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use , for leader key
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+
 " required vundle setup
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
@@ -43,15 +48,17 @@ autocmd BufEnter    *.git/COMMIT_EDITMSG  exe BufEnterCommit()
 " Automatically remove fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" Play Rogue!
+Plugin 'katono/rogue.vim'
+
 " ctrlp
 Plugin 'kien/ctrlp.vim'
 
 " nerdtree
 Plugin 'scrooloose/nerdtree'
 
-autocmd vimenter * NERDTree
 autocmd stdinreadpre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
 
 map <c-n> :NERDTreeToggle<cr>
 
@@ -62,6 +69,9 @@ Plugin 'jlanzarotta/bufexplorer'
 
 " vim-sensible
 Plugin 'tpope/vim-sensible'
+
+" vim-surround
+Plugin 'surround.vim'
 
 " ack
 Plugin 'mileszs/ack.vim'
@@ -76,6 +86,12 @@ map <leader>a :ag! <c-r><c-w><cr>
 " see https://github.com/ggreer/the_silver_searcher
 " on mac: brew install the_silver_searcher
 let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Tmux Navigator
+" Allows navigation between Vim and Tmux panes using Ctrl + hjkl
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'christoomey/vim-tmux-navigator'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " improved javascript indentation
@@ -146,19 +162,7 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 set relativenumber
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use Vim keys to navigate between panes
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use , for leader key
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","
+set list
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use jk to exit insert mode
