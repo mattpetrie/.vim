@@ -14,6 +14,18 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Powerline for status line
+" Powerline system installation instructions:
+" https://powerline.readthedocs.org/
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic syntax linting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'scrooloose/syntastic'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fugitive
 "
 " Git in vim, use ,gs for git status then - to stage then C to commit
@@ -47,6 +59,15 @@ autocmd BufEnter    *.git/COMMIT_EDITMSG  exe BufEnterCommit()
 
 " Automatically remove fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" Eunuch
+Plugin 'tpope/vim-eunuch'
+
+" Gitgutter
+Plugin 'airblade/vim-gitgutter'
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_realtime = 750
+highlight clear SignColumn
 
 " Play Rogue!
 Plugin 'katono/rogue.vim'
@@ -173,3 +194,4 @@ inoremap jk <ESC>
 " Use hybrid color scheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme hybrid
+highlight LineNr ctermfg=lightgray  ctermbg=darkgray
