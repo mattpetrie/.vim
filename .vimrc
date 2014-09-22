@@ -115,6 +115,11 @@ let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
 Plugin 'christoomey/vim-tmux-navigator'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Emmet for HTML/CSS shortcuts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'mattn/emmet-vim'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " improved javascript indentation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'pangloss/vim-javascript'
@@ -194,4 +199,19 @@ inoremap jk <ESC>
 " Use hybrid color scheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme hybrid
-highlight LineNr ctermfg=lightgray  ctermbg=darkgray
+highlight LineNr ctermfg=darkgray  ctermbg=8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set tabs to 2 spaces
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set smartindent
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set a rule at 80 characters
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set colorcolumn=80
+highlight ColorColumn ctermbg=8
